@@ -13,12 +13,13 @@ public class Book {
     private int id;
 
     @NotBlank(message = "title shouldn't be empty")
-         @Pattern(regexp = "[A-Z]\\w+ [a-zA-Z]\\w*" , message = "title should start with uppercase")
+    @Size(min = 2, max = 20, message = "Title should be between 2 and 20")
     @Column
     private String title;
+
     @NotBlank(message = "author shouldn't be empty")
     @Column
-    @Pattern(regexp = "[A-Z]\\w+ [A-Z]\\w+" , message = "author should start with uppercase")
+    @Size(min = 2, max = 20, message = "Author should be between 2 and 20")
     private String author;
 
     @Column
