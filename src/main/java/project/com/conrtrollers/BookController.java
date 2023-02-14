@@ -5,8 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import project.com.dao.BookDao;
-import project.com.dao.ClientDao;
 import project.com.models.Book;
 import project.com.models.Client;
 import project.com.services.BookService;
@@ -21,17 +19,15 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/book")
 public class BookController {
-    BookDao bookDao;
-    ClientDao clientDao;
-    BookValidation bookValidation;
-    BookService bookService;
-    ClientService clientService;
+
+    private final BookValidation bookValidation;
+    private final BookService bookService;
+    private final ClientService clientService;
 
     @Autowired
-    public BookController(BookDao bookDao, ClientDao clientDao, BookValidation bookValidation,
+    public BookController(BookValidation bookValidation,
                           BookService bookService, ClientService clientService) {
-        this.bookDao = bookDao;
-        this.clientDao = clientDao;
+
         this.bookValidation = bookValidation;
         this.bookService = bookService;
         this.clientService = clientService;

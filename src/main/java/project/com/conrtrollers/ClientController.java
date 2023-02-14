@@ -5,36 +5,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import project.com.dao.ClientDao;
 import project.com.models.Book;
 import project.com.models.Client;
-import project.com.repositories.ClientRepository;
 import project.com.services.BookService;
 import project.com.services.ClientService;
 
 import javax.validation.Valid;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
 @RequestMapping("/client")
 public class ClientController {
-    ClientService clientService;
-    BookService bookService;
-    ClientDao clientDao;
+    private final ClientService clientService;
+    private final BookService bookService;
+
+
     @Autowired
-    public ClientController(ClientService clientService, BookService bookService, ClientDao clientDao) {
+    public ClientController(ClientService clientService, BookService bookService) {
         this.clientService = clientService;
         this.bookService = bookService;
-        this.clientDao = clientDao;
+
     }
+
     @GetMapping("/info")
     public String clientsInfo(Model model) {
         model.addAttribute("clients", clientService.getClients());
         return "clients/clients";
     }
+
     @GetMapping("/{id}")
     public String clientInfo(@PathVariable("id") int id, Model model) {
         model.addAttribute("client", clientService.getClient(id));

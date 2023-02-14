@@ -20,7 +20,7 @@ import static java.util.Collections.singletonList;
 @Service
 @Transactional(readOnly = true)
 public class BookService {
-    BookRepository bookRepository;
+   private final  BookRepository bookRepository;
 
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
@@ -54,7 +54,7 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
-    @Transactional
+
     public Client getOwner(int id) {
 
         Book book = bookRepository.findById(id).orElse(null);
@@ -70,7 +70,7 @@ public class BookService {
         book.setOwner(client);
 
     }
-
+    @Transactional
     public void bookRelease(int id) {
 
         Book book = bookRepository.findById(id).orElse(null);
@@ -81,7 +81,7 @@ public class BookService {
 
     }
 
-    @Transactional
+
     public List<Book> findAllOrderByYear() {
 
         return bookRepository.findAllByOrderByYear();
@@ -89,7 +89,7 @@ public class BookService {
 
     ;
 
-    @Transactional
+
     public Page<Book> findAllOrderByYearPag(int page, int itemsPerPage) {
 
 
@@ -98,7 +98,7 @@ public class BookService {
 
     ;
 
-    @Transactional
+
     public Page<Book> findAllPag(int page, int itemsPerPage) {
 
 
@@ -114,7 +114,7 @@ public class BookService {
     public Optional<Book> check(String title){
         return bookRepository.findByTitle(title);
     }
-
+    @Transactional
     public void isOverdue(List<Book> books) {
         SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         String date1 = "01.11.2022";
