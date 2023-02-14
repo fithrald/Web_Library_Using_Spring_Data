@@ -135,12 +135,10 @@ public class BookService {
             }
             long diff = date.getTime() - book.getTakenAt().getTime();
             if (diff > tenDays) {
-                System.out.println("книжка просрочена");
                 book.setOverdue(true);
 
             } else {
                 book.setOverdue(false);
-                System.out.println("книжка не просрочена");
 
             }
         }
